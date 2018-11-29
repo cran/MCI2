@@ -1,0 +1,17 @@
+ citHeader("To cite the 'MCI2' package in publications use:")
+ 
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+ 
+  citEntry(
+     entry = "Article",
+     title = "{M}arket {A}rea {A}nalysis for {R}etail and {S}ervice {L}ocations with {MCI} ",
+     author = as.person("Thomas Wieland [aut]"),
+     year = "2017",
+     journal = "The R Journal",
+     volume = "9",
+     number = "1",
+     pages = "298--323",
+     url = "https://journal.r-project.org/archive/2017/RJ-2017-020/RJ-2017-020.pdf",
+     textVersion = "Wieland, T. (2017). Market Area Analysis for Retail and Service Locations with MCI. The R Journal, 9(1), 298-323. URL https://journal.r-project.org/archive/2017/RJ-2017-020/RJ-2017-020.pdf."
+  )
