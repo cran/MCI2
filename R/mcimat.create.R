@@ -7,6 +7,8 @@ function (rawdata, origins.id, destinations.id, ...,
                            corObserved = 0,
                            remNA = TRUE) {
   
+  checkod(origins.id, destinations.id)
+  
   if (!is.null(remOrig)) {
 
     rawdata <- subset (rawdata, !(rawdata[[origins.id]] %in% remOrig))

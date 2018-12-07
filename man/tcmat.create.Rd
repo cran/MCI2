@@ -4,13 +4,17 @@
 \title{
 Creation of a transport costs matrix
 }
+
 \description{
 Creation of a transport costs matrix (airline distance, car travel time) 
 }
+
 \usage{
-tcmat.create(origins.id, origins.addr, destinations.id, destinations.addr, 
-tc.type = "airline", tc.unit = "km", addr.format = "stradr", tc.constant = 0, 
-show_proc = FALSE)
+tcmat.create(origins.id, origins.addr, 
+destinations.id, destinations.addr, 
+tc.type = "airline", tc.unit = "km", 
+or.addr.format = "stradr", de.addr.format = "stradr",
+tc.constant = 0, show_proc = FALSE)
 }
 
 \arguments{
@@ -18,13 +22,13 @@ show_proc = FALSE)
 ID of the origins
 }
   \item{origins.addr}{
-(Street) address of the origins
+Address of the origins, either street addresses (e.g. "Markgrafenstrasse 68, Freiburg, Germany") or coordinates (X_LON;X_LAT, e.g.: "7,82218;47,99387")
 }
   \item{destinations.id}{
 ID of the destinations
 }
   \item{destinations.addr}{
-(Street) address of the destinations
+Address of the destinations, either street addresses (e.g. "Markgrafenstrasse 68, Freiburg, Germany") or coordinates (X_LON;X_LAT, e.g.: "7,82218;47,99387")
 }
   \item{tc.type}{
 Type of transportat costs: \code{"airline"} (airline distance) or \code{"street"} (car travel time)
@@ -32,8 +36,11 @@ Type of transportat costs: \code{"airline"} (airline distance) or \code{"street"
   \item{tc.unit}{
 If \code{tc.type = "airline"}: unit of distance ("m", "km" or "miles")
 }
-  \item{addr.format}{
-Address format. Default: \code{"stradr"} (street addresses))
+  \item{or.addr.format}{
+Origins address format. Default: \code{"stradr"} (street addresses))
+}
+  \item{de.addr.format}{
+Destinations address format. Default: \code{"stradr"} (street addresses))
 }
   \item{tc.constant}{
 Adding a constant to the calculated/queried values (default: 0)
@@ -42,9 +49,11 @@ Adding a constant to the calculated/queried values (default: 0)
 Logical argument that indicates if the function prints messages about the state of process during the work 
 }
 }
+
 \details{
 Creation of a \code{tcmat list} object (Transport costs matrix) for further use in \code{huff} and \code{mcimat.create}. Included geocoding of street addresses (from \code{geocode_OSM} in \pkg{tmaptools}) and travel time query (from \code{ormsTable} in \pkg{osrm}) or the calculation of airline distances (from \code{dist.mat} in \pkg{REAT}).
 }
+
 \value{
 A \code{tcmat list} (invisible) containing the following components:
 \item{coords_origins }{A \code{data.frame} containing the coordinates (lat, lon) of the origins}
@@ -52,6 +61,7 @@ A \code{tcmat list} (invisible) containing the following components:
 \item{tcmat }{A \code{data.frame} containing the transport costs matrix}
 \item{tc.mode }{A \code{list} containing information about the transportation costs matrix}
 }
+
 \references{
 Giraud, T. (2018): osrm: Interface Between R and the OpenStreetMap-Based Routing Service OSRM. R package version 3.1.1. \url{https://CRAN.R-project.org/package=osrm}.
   
@@ -61,9 +71,11 @@ Wieland, T. (2017): \dQuote{Market Area Analysis for Retail and Service Location
 
 Wieland, T. (2018): REAT: Regional Economic Analysis Toolbox. R package version 2.1.0. \url{https://CRAN.R-project.org/package=REAT}.
 }
+
 \author{
 Thomas Wieland
 }
+
 \note{
 This function is wrapper of the functions \code{geocode_OSM} (for geocoding street addresses using OSM Nominatim) from the \pkg{tmaptools} package (Tennekes 2018), \code{osrmTable} (for creating travel time matrices between points while interfacing the table OSRM service) from the  \pkg{osrm} package (Giraud 2018) and \code{dist.mat} (for creating airline distances between points) from the \pkg{REAT} package (Wieland 2018). The OSM-related functions rely on the usage of a running OSRM service! For more information, see the related package documentations. 
 }
@@ -71,7 +83,15 @@ This function is wrapper of the functions \code{geocode_OSM} (for geocoding stre
 \seealso{
 \code{\link{huff}}, \code{\link{mcimat.create}}
 }
+
 \examples{
+data(HaslachSurvey)
+# survey raw data (Store choices and purchases)
+data(HaslachDistricts)
+# IDs and information about customer origins
+data(HaslachStores)
+# IDs and information about destinations (grocery stores)
+
 \dontrun{
 tcmat_haslach_airline <- tcmat.create(origins.id = HaslachDistricts$WO, 
 origins.addr = HaslachDistricts$WO_Adr, destinations.id = HaslachStores$LM, 

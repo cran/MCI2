@@ -5,6 +5,7 @@ function (origins.id, origins.pot,
                   atype = "pow", gamma = 1, gamma2 = NULL,
                   dtype = "pow", lambda = -2, lambda2 = NULL) {
   
+  checkod(origins.id, destinations.id)
 
   tcmat_fromto <- tcmat$tcmat[,3:4]
 

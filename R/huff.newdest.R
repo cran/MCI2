@@ -24,7 +24,7 @@ function (huffmodel, newdest.id, newdest.addr, newdest.attract, newdestaddr.form
                         destinations.id = newdest.id,
                         destinations.addr = newdest.addr,
                         tc.type = tc_mode$tc.type, tc.unit = tc_mode$tc.unit, 
-                        addr.format = newdestaddr.format, tc.constant = tc_mode$tc.constant)
+                        de.addr.format = newdestaddr.format, tc.constant = tc_mode$tc.constant)
   
 
   huffmat_add[,1] <- newtc$tcmat$from_to

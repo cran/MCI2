@@ -1,4 +1,4 @@
-export("huff", "huff.newdest", "huff.updest", "mci", "mci.sim", "mcimat.create", "model.export", "rawdata.prep", "tcmat.create")
+export("huff", "huff.newdest", "huff.optim", "huff.updest", "mci", "mci.sim", "mcimat.create", "model.export", "rawdata.prep", "tcmat.create", "to.tcmat")
 importFrom("stats", "lm", "aggregate", "pf", "complete.cases")
 importFrom("utils", "write.table")
 importFrom("MCI", "geom", "huff.attrac", "huff.decay", "huff.fit", "huff.lambda", "huff.shares", "ijmatrix.create", "ijmatrix.crosstab", "ijmatrix.shares", "lm.beta", "mci.fit", "mci.shares", "mci.shares.elast", "mci.transmat", "mci.transvar", "model.fit", "shares.segm", "shares.total", "var.asdummy", "var.correct")

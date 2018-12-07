@@ -1,21 +1,33 @@
-tcmat.create <-
+tcmat.create <- 
 function (origins.id, origins.addr, 
-                          destinations.id, destinations.addr, 
-                          tc.type = "airline", tc.unit = "km", addr.format = "stradr", 
-                          tc.constant = 0, show_proc = FALSE) {
+destinations.id, destinations.addr, 
+tc.type = "airline", tc.unit = "km", 
+or.addr.format = "stradr", de.addr.format = "stradr",
+tc.constant = 0, show_proc = FALSE) {
+  
+  addr_formats <- c("stradr", "coords")
+  if ((or.addr.format %in% addr_formats) == FALSE)
+  {
+    stop("Origins address format must be either lon/lat (coords) or street address (stradr)", call. = FALSE)
+  }
+  if ((de.addr.format %in% addr_formats) == FALSE)
+  {
+    stop("Destinations address format must be either lon/lat (coords) or street address (stradr)", call. = FALSE)
+  }
+  
+  checkod(origins.id, destinations.id, origins.addr, destinations.addr)
   
   if (show_proc == TRUE) {
-  
-  cat ("\n")
-  cat ("Transport costs matrix")
-  cat ("\n")
-  
+    
+    cat ("\n")
+    cat ("Transport costs matrix")
+    cat ("\n")
+    
   }
- 
-
-  if (addr.format == "stradr") {
-
-
+  
+  
+  if (or.addr.format == "stradr") {
+    
     if (show_proc == TRUE) {
       cat ("Geocoding origins ... ")
     }
@@ -38,9 +50,31 @@ function (origins.id, origins.addr,
     if (show_proc == TRUE) {
       cat("OK", "\n")
     }
-    
-    
+  }
+  
+  if (or.addr.format == "coords") {
 
+    coords <- matrix(ncol = 2, nrow = length(origins.id))
+    
+    for (i in 1:length(origins.id)) {
+      coords[i,] <- unlist(strsplit(origins.addr[i], ";"))
+      coords[i,] <- gsub(",", ".", coords[i,])
+    }
+    
+    coords_origins <- data.frame(matrix (nrow = length(origins.id), ncol = 4))
+    
+    coords_origins[,1] <- as.character(origins.id)
+    coords_origins[,2] <- NA
+    coords_origins[,3] <- as.numeric(coords[,1])
+    coords_origins[,4] <- as.numeric(coords[,2])
+    
+    colnames(coords_origins) <- c("origins.id", "origins.addr", "origins.x_lon", "origins.y_lat")
+    
+  }
+  
+  
+  if (de.addr.format == "stradr") { 
+    
     if (show_proc == TRUE) { 
       cat ("Geocoding destinations ... ")
     }
@@ -59,17 +93,33 @@ function (origins.id, origins.addr,
     }
     
     colnames(coords_destinations) <- c("destinations.id", "destinations.addr", "destinations.x_lon", "destinations.y_lat")
-
     
     if (show_proc == TRUE) { cat("OK", "\n") }
     
   }
   
+  if (de.addr.format == "coords") {
+    
+    coords <- matrix(ncol = 2, nrow = length(destinations.id))
+    
+    for (i in 1:length(destinations.id)) {
+      coords[i,] <- unlist(strsplit(destinations.addr[i], ";"))
+      coords[i,] <- gsub(",", ".", coords[i,])
+    }
+    
+    coords_destinations <- data.frame(matrix (nrow = length(destinations.id), ncol = 4))
+    
+    coords_destinations[,1] <- as.character(destinations.id)
+    coords_destinations[,2] <- NA
+    coords_destinations[,3] <- as.numeric(coords[,1])
+    coords_destinations[,4] <- as.numeric(coords[,2])
+    
+    colnames(coords_destinations) <- c("origins.id", "origins.addr", "origins.x_lon", "origins.y_lat")
+    
+  }
   
-
   
   if (tc.type == "street") {
-
     
     if (show_proc == TRUE) {
       cat ("Query of travel times ... ")
@@ -77,7 +127,7 @@ function (origins.id, origins.addr,
     
     tc_single_list <- osrmTable(src = coords_origins[1:nrow(coords_origins),c("origins.id","origins.x_lon","origins.y_lat")],
                                 dst = coords_destinations[1:nrow(coords_destinations),c("destinations.id","destinations.x_lon","destinations.y_lat")])
-
+    
     if (show_proc == TRUE) {
       cat("OK", "\n")
       cat("\n")
@@ -93,13 +143,15 @@ function (origins.id, origins.addr,
     
     tcmat$from_to <- paste0(tcmat$from, "-", tcmat$to)
     
-
+    if (tc.unit == "hou") { tcmat$tc <- tcmat$tc/60 }
+    if (tc.unit == "sec") { tcmat$tc <- tcmat$tc*60 }
+    
     tcmat <- tcmat[,c(1,2,4,3)]
-
+    
   }
   
   else {
-
+    
     if (show_proc == TRUE) {
       cat ("Calculating distances ... ")
     }
@@ -115,11 +167,9 @@ function (origins.id, origins.addr,
       cat("\n")
     }
     
-
   }
   
   tcmat$tc <- tcmat$tc+tc.constant
-
   
   tc.mode <- list(tc.type = tc.type, tc.unit = tc.unit, tc.constant = tc.constant)
   
