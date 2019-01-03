@@ -1,4 +1,4 @@
-59124bfee8e11a34b478839efe70b888 *DESCRIPTION
+8e95323b3c8770c0ace298294d0d2017 *DESCRIPTION
 33084fd924d71dc499a16c119d0e4f4b *NAMESPACE
 2b1c13d5dedfc0e93a581b83da7a6f7e *R/checkod.R
 e7302223c2adccddc77b14a50ff2e820 *R/huff.R
@@ -9,7 +9,7 @@ c4c26da99edc7af0e3a6903a4d45d4e4 *R/huff.updest.R
 0979119e801e5046a68d19844f633ac4 *R/mci.sim.R
 7ea79842095b59d4687df20fd3f646fd *R/mcimat.create.R
 30ba162c7abf936a8beed561a67cb636 *R/model.export.R
-838444d868bb3d162e63db14c6bce4d1 *R/rawdata.prep.R
+92651b7a0abee1e4788ab9627569ca1c *R/rawdata.prep.R
 85c5270178af2f9dd736b932d9f55a4d *R/tcmat.create.R
 ccdfdea8a885c713836439115fdac4b0 *R/to.tcmat.R
 19d1b6dd614818e3c2e6f5cf1b15d95c *data/HaslachDistricts.rda
