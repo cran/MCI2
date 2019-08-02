@@ -55,10 +55,14 @@ Nakanishi, M./Cooper, L. G. (1974): \dQuote{Parameter Estimation for a Multiplic
 Nakanishi, M./Cooper, L. G. (1982): \dQuote{Simplified Estimation Procedures for MCI Models}. In: \emph{Marketing Science}, \bold{1}, 3, p. 314-322. 
 
 Wieland, T. (2017): \dQuote{Market Area Analysis for Retail and Service Locations with MCI}. In: \emph{The R Journal}, \bold{9}, 1, p. 298-323. \url{https://journal.r-project.org/archive/2017/RJ-2017-020/RJ-2017-020.pdf}.
+
+Wieland, T. (2018): \dQuote{Competitive locations of grocery stores in the local supply context - The case of the urban district Freiburg-Haslach}. In: \emph{European Journal of Geography}, \bold{9}, 3, p. 98-115.
 }
+
 \author{
 Thomas Wieland
 }
+
 \note{
 The function is a wrapper of \code{mci.transmat} and \code{mci.fit} of the \pkg{MCI} package. For further information see the \pkg{MCI} documentation and the corresponding RJ paper (Wieland 2017).
 }
@@ -116,7 +120,7 @@ data(HaslachStores)
 HaslachSurvey_prepared <- rawdata.prep (cols.below1 = 
 list(HaslachSurvey$LM1_Text, HaslachSurvey$LM2_Text),
 cols.below2 = list(HaslachSurvey$LM1E, HaslachSurvey$LM2E),
-cols.keep = HaslachSurvey$WO,
+cols.keep = list(HaslachSurvey$WO),
 colnames.new = c("LM", "LME", "Wohnort"))
 # "WO" and "Wohnort" = origin ID
 # "LM1_Text", "LM2_Text" and "LM" = destination IDs (grocery stores)

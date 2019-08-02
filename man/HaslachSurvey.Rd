@@ -39,6 +39,8 @@ Part of a point of sale survey (n=235) in Freiburg-Haslach with respect to groce
 }
 \source{
 Own survey (June 2018). Own postprocessing.
+
+Wieland, T. (2018): \dQuote{Competitive locations of grocery stores in the local supply context - The case of the urban district Freiburg-Haslach}. In: \emph{European Journal of Geography}, \bold{9}, 3, p. 98-115.
 }
 
 
@@ -91,7 +93,7 @@ data(HaslachStores)
 HaslachSurvey_prepared <- rawdata.prep (cols.below1 = 
 list(HaslachSurvey$LM1_Text, HaslachSurvey$LM2_Text),
 cols.below2 = list(HaslachSurvey$LM1E, HaslachSurvey$LM2E),
-cols.keep = HaslachSurvey$WO,
+cols.keep = list(HaslachSurvey$WO),
 colnames.new = c("LM", "LME", "Wohnort"))
 # "WO" and "Wohnort" = origin ID
 # "LM1_Text", "LM2_Text" and "LM" = destination IDs (grocery stores)

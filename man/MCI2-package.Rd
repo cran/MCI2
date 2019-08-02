@@ -27,5 +27,7 @@ Tennekes, M. (2018): tmaptools: Thematic Map Tools. R package version 2.0-1. \ur
 
 Wieland, T. (2017): \dQuote{Market Area Analysis for Retail and Service Locations with MCI}. In: \emph{The R Journal}, \bold{9}, 1, p. 298-323. \url{https://journal.r-project.org/archive/2017/RJ-2017-020/RJ-2017-020.pdf}.
 
-Wieland, T. (2018): REAT: Regional Economic Analysis Toolbox. R package version 2.1.0. \url{https://CRAN.R-project.org/package=REAT}.
+Wieland, T. (2018): \dQuote{Competitive locations of grocery stores in the local supply context - The case of the urban district Freiburg-Haslach}. In: \emph{European Journal of Geography}, \bold{9}, 3, p. 98-115.
+
+Wieland, T. (2019): REAT: Regional Economic Analysis Toolbox. R package version 3.0.0. \url{https://CRAN.R-project.org/package=REAT}.
 }

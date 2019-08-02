@@ -1,38 +1,29 @@
-\name{huff.updest}
-\alias{huff.updest}
+\name{huff.comp}
+\alias{huff.comp}
 
 \title{
-Huff Model market simulation with an updated destination
+Compare two Huff models
 }
 \description{
-Updating an existing location and (re-)calculating local market shares and total market areas of locations using the probabilistic market area model by Huff
+Comparison of two existing Huff model objects with respect to changes in total market areas
 }
 \usage{
-huff.updest(huffmodel, dest.id, dest.attrac)
+huff.comp(huffmodel1, huffmodel2)
 }
 
 \arguments{
-  \item{huffmodel}{
+  \item{huffmodel1}{
 Object (\code{list}) created by the function \code{huff} (Huff Model)
 }
-  \item{dest.id}{
-Code of the existing destination that has to be updated
-}
-  \item{dest.attrac}{
-New attraction value of the existing destination
+  \item{huffmodel2}{
+Object (\code{list}) created by the function \code{huff} (Huff Model)
 }
 }
-\details{
-Updating the attraction value of an existing destination (e.g. store) in a given location system (Huff Model object). This function computes local market shares (\eqn{p_{ij}}) and total market areas (\eqn{T_j}) according to the Huff Model.
-}
+
 \value{
-A \code{huffmodel list} (invisible) containing the following components:
-\item{huffmat }{Huff interaction matrix (\code{data frame}), also containing the local market shares (\code{p_ij})}
-\item{hufftotal }{Total location market areas (\code{data frame}), also containing the total market areas (\code{T_j})}
-\item{params }{A \code{matrix} containing the user-defined weighting functions and the corresponding weighting parameters}
-\item{coords }{A \code{list} containing the coordinates and additional information of the origins (\code{coords_origins}) and the destinations (\code{coords_destinations}), inherited from the \code{tcmat} object}
-\item{tc.mode }{A \code{list} containing information about the transportation costs matrix, inherited from the \code{tcmat} object}
+A \code{data frame} (invisible) with one row for each \eqn{j} destination and their total market area values from Huff model 1 and 2, respectively, and the corresponding total, share and percentage changes
 }
+
 \references{
 Huff, D. L. (1962): \dQuote{Determination of Intra-Urban Retail Trade Areas}. Los Angeles : University of California.
 
@@ -48,15 +39,13 @@ Wieland, T. (2017): \dQuote{Market Area Analysis for Retail and Service Location
 
 Wieland, T. (2018): \dQuote{Competitive locations of grocery stores in the local supply context - The case of the urban district Freiburg-Haslach}. In: \emph{European Journal of Geography}, \bold{9}, 3, p. 98-115.
 }
+
 \author{
 Thomas Wieland
 }
-\note{
-The function is a wrapper of \code{huff.shares} and \code{shares.total} of the \pkg{MCI} package. For further information see the \pkg{MCI} documentation and the corresponding RJ paper (Wieland 2017).
-}
 
 \seealso{
-\code{\link{huff}}, \code{\link{huff.newdest}}, \code{\link{tcmat.create}}
+\code{\link{huff}}, \code{\link{huff.newdest}}, \code{\link{huff.updest}}
 }
 
 \examples{
@@ -113,6 +102,9 @@ HaslachStores$LM, HaslachStores$LM_VKF,
 tcmat = tcmat_haslach_airline,
 atype = "pow", gamma = 0.9, dtype = "pow", lambda = -2.1)
 # Alternative weighting parameters
+
+huff.comp(huffmodel1, huffmodel1a)
+# Comparinf results of huffmodel1 and huffmodel1a
 
 \dontrun{
 huffmodel2 <- huff.newdest(huffmodel1, newdest.id = "LM_NEU",

@@ -21,7 +21,7 @@ First list of columns in a survey data frame to arrange one below the other (e.g
 Second list of columns in a survey data frame to arrange one below the other (e.g. obtained destination purchases)
 }
   \item{cols.keep}{
-Single column in a survey data frame that must be kept for all data (e.g. IDs of customer origins)
+List of columns in a survey data frame that must be kept for all data (e.g. IDs of customer origins)
 }
   \item{colnames.new}{
 Character vector of new column names
@@ -40,6 +40,8 @@ A \code{data frame} containing three columns named corresponding to \code{colnam
 Huff, D. L./Batsell, R. R. (1975): \dQuote{Conceptual and Operational Problems with Market Share Models of Consumer Spatial Behavior}. In: \emph{Advances in Consumer Research}, \bold{2}, p. 165-172.
 
 Wieland, T. (2017): \dQuote{Market Area Analysis for Retail and Service Locations with MCI}. In: \emph{The R Journal}, \bold{9}, 1, p. 298-323. \url{https://journal.r-project.org/archive/2017/RJ-2017-020/RJ-2017-020.pdf}.
+
+Wieland, T. (2018): \dQuote{Competitive locations of grocery stores in the local supply context - The case of the urban district Freiburg-Haslach}. In: \emph{European Journal of Geography}, \bold{9}, 3, p. 98-115.
 }
 
 \author{
@@ -58,7 +60,7 @@ data(HaslachSurvey)
 HaslachSurvey_prepared <- rawdata.prep (cols.below1 = 
 list(HaslachSurvey$LM1_Text, HaslachSurvey$LM2_Text),
 cols.below2 = list(HaslachSurvey$LM1E, HaslachSurvey$LM2E),
-cols.keep = HaslachSurvey$WO,
+cols.keep = list(HaslachSurvey$WO),
 colnames.new = c("LM", "LME", "Wohnort"))
 # "WO" and "Wohnort" = origin ID
 # "LM1_Text", "LM2_Text" and "LM" = destination IDs (grocery stores)
